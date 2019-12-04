@@ -17,3 +17,5 @@ demo/transfer_data/*
 get_keyframe/frames/*
 
 get_human_body_info/demo_output/*
+
+!.gitkeep
