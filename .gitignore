@@ -10,7 +10,7 @@ get_human_body_info/models/hmmr_model.ckpt-1119816.data-00000-of-00001
 
 .vscode
 
-demo/result/*
+demo/results/*
 demo/src/*
 demo/transfer_data/*
 
