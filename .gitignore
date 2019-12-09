@@ -8,6 +8,8 @@ get_human_body_info/src/external/AlphaPose/models/yolo/yolov3-spp.weights
 get_human_body_info/models/hmr_noS5.ckpt-642561.data-00000-of-00001
 get_human_body_info/models/hmmr_model.ckpt-1119816.data-00000-of-00001
 
+__pycache__
+
 .vscode
 
 demo/results/*
