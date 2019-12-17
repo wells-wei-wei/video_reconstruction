@@ -231,19 +231,19 @@ if __name__ == "__main__":
 
     # set imitator
     imitator = Imitator(test_opt)
-
+    '''
     if test_opt.post_tune:
         adaptive_personalize(test_opt, imitator, visualizer)
-
+    '''
     imitator.personalize(test_opt.src_path, visualizer=visualizer)
     print('\n\t\t\tPersonalization: completed...')
-
+    '''
     if test_opt.save_res:
         pred_output_dir = mkdir(os.path.join(test_opt.output_dir, 'imitators'))
         pred_output_dir = clear_dir(pred_output_dir)
     else:
         pred_output_dir = None
-
+    '''
     print('\n\t\t\tImitating `{}`'.format(test_opt.tgt_path))
     tgt_paths = scan_tgt_paths(test_opt.tgt_path, itv=1)
     imitator.get_every_img_info(tgt_paths)

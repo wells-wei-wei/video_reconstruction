@@ -153,17 +153,23 @@ class Imitator(BaseModel):
         theta = self.hmr(img)[-1]
 
         return theta
-    
+
+    @torch.no_grad()
     def get_every_img_info(self, tgt_paths):
         length = len(tgt_paths)
 
         human_body_info = {}
-        process_bar = tqdm(range(length)) if verbose else range(length)
+        process_bar = tqdm(range(length)) #if verbose else range(length)
 
         for t in process_bar:
             tgt_path = tgt_paths[t]
-            tsf_inputs = self.transfer_params(tgt_path, tgt_smpl, cam_strategy, t=t)
-            human_body_info[tgt_path]=tsf_inputs
+            ori_img = cv_utils.read_cv2_img(tgt_path)
+            img_hmr = cv_utils.transform_img(ori_img, 224, transpose=True) * 2 - 1.0
+            img_hmr = torch.tensor(img_hmr, dtype=torch.float32).cuda()[None, ...]
+            tgt_smpl = self.hmr(img_hmr)
+            #tsf_inputs = self.transfer_params(tgt_path, tgt_smpl=None, cam_strategy='smooth', t=t)
+            human_body_info[tgt_path]=tgt_smpl
+            
         with open('../demo/transfer_data/human_body_info.pkl', 'wb') as f:
             print('Saving prediction results to', '../demo/transfer_data/human_body_info.pkl')
             pickle.dump(human_body_info, f)
