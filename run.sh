@@ -1,21 +1,20 @@
-cd demo/results
-rm -rf ./*
+cd demo/src
+rm -rf frames
 
 cd ../transfer_data
 rm ./*
 
-cd ..
-
-cd ../get_keyframe/frames
-rm ./*
-
-cd ..
-python demo.py
-
-cd ../get_human_body_info/demo_output
+cd ../results
 rm -rf ./*
-cd ..
-python demo_video.py
 
-cd ../generate_video
-python demo.py --gpu_ids 0
+cd ../..
+
+cd generate_video
+
+python get_keyframes.py
+python get_human_body_info.py
+python generate_video.py
+
+cd ../demo
+
+ffmpeg -i ./results/frames/pred_%06d.jpg -vcodec mpeg4 ./results/demo.mp4

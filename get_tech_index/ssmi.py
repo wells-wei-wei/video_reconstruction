@@ -102,19 +102,11 @@ if __name__ == '__main__':
     files.sort()
     all_dist=0
     for file in files:
-        file_num=file[5:13]
-        file_num_start=0
-        for i in range(len(file_num)):
-            if(file_num[i]!="0"):
-                file_num_start=i
-                break
-            if(i==len(file_num)-1):
-                file_num_start=i
-                break
-        d1_file_name=file_num[file_num_start:]+".jpg"
-        if(os.path.exists(os.path.join("../get_keyframe/frames",d1_file_name))):
+        file_num=file[5:]
+        d1_file_name=file_num
+        if(os.path.exists(os.path.join("../demo/src/frames",d1_file_name))):
             img1=cv2.imread(os.path.join("../demo/results/frames",file),cv2.IMREAD_GRAYSCALE)
-            img2=load_source_image(os.path.join("../get_keyframe/frames",d1_file_name))
+            img2=load_source_image(os.path.join("../demo/src/frames",d1_file_name))
             #ssmi_dist=ssim(img1,img2)
             (ssmi_dist, diff) = compare_ssim(img1, img2, full=True)
             print('%s: %.3f'%(file,ssmi_dist))

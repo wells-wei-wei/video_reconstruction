@@ -175,6 +175,20 @@ class Imitator(BaseModel):
             pickle.dump(human_body_info, f)
 
     @torch.no_grad()
+    def generate_video(self, human_body_info, tgt_smpls=None, cam_strategy='smooth',output_dir='', visualizer=None, verbose=True):
+        #length = len(human_body_info)
+        #process_bar = tqdm(range(length)) if verbose else range(length)
+        t=0
+        for key in human_body_info:
+            tgt_smpl=human_body_info[key]
+            tsf_inputs = self.transfer_params_by_smpl(tgt_smpl=tgt_smpl, cam_strategy=cam_strategy, t=t)
+            preds = self.forward(tsf_inputs, self.tsf_info['T'])
+            preds = preds[0].permute(1, 2, 0)
+            preds = preds.cpu().numpy()
+            cv_utils.save_cv2_img(preds, os.path.join(output_dir, 'pred_' + key[-10:]), normalize=True)
+            t=t+1
+
+    @torch.no_grad()
     def inference(self, tgt_paths, tgt_smpls=None, cam_strategy='smooth',
                   output_dir='', visualizer=None, verbose=True):
 
