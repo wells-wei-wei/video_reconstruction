@@ -4,10 +4,11 @@ import os
 import cv2
 from glob import glob
 videos_src_path = "../demo/src"
-frames_save_path = "./frames/"
+frames_save_path = "../demo/src/frames/"
+os.system("mkdir ../demo/src/frames/")
 
 def get_keyframe(frame_save_path):
-    cmd='cp '+frame_save_path+'1.jpg'+' ../demo/transfer_data/'
+    cmd='cp '+frame_save_path+'000000.jpg'+' ../demo/transfer_data/'
     os.system(cmd)
 
 def video2frame(cap, frame_save_path, frame_width, frame_height, interval):
@@ -34,7 +35,7 @@ def video2frame(cap, frame_save_path, frame_width, frame_height, interval):
         if frame_index % interval == 0 and success:
             resize_frame = cv2.resize(frame, (frame_width, frame_height), interpolation=cv2.INTER_AREA)
             # cv2.imwrite(each_video_save_full_path + each_video_name + "_%d.jpg" % frame_index, resize_frame)
-            cv2.imwrite(frames_save_path + "%d.jpg" % frame_count, resize_frame)
+            cv2.imwrite(frames_save_path + "%06d.jpg" % frame_count, resize_frame)
             frame_count += 1
 
         frame_index += 1
