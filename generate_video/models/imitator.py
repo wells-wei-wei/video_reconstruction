@@ -9,7 +9,7 @@ from utils.nmr import SMPLRenderer
 from utils.detectors import PersonMaskRCNNDetector
 import utils.cv_utils as cv_utils
 import utils.util as util
-
+import pickle
 
 class Imitator(BaseModel):
     def __init__(self, opt):
@@ -153,6 +153,20 @@ class Imitator(BaseModel):
         theta = self.hmr(img)[-1]
 
         return theta
+    
+    def get_every_img_info(self, tgt_paths):
+        length = len(tgt_paths)
+
+        human_body_info = {}
+        process_bar = tqdm(range(length)) if verbose else range(length)
+
+        for t in process_bar:
+            tgt_path = tgt_paths[t]
+            tsf_inputs = self.transfer_params(tgt_path, tgt_smpl, cam_strategy, t=t)
+            human_body_info[tgt_path]=tsf_inputs
+        with open('../demo/transfer_data/human_body_info.pkl', 'wb') as f:
+            print('Saving prediction results to', '../demo/transfer_data/human_body_info.pkl')
+            pickle.dump(human_body_info, f)
 
     @torch.no_grad()
     def inference(self, tgt_paths, tgt_smpls=None, cam_strategy='smooth',
