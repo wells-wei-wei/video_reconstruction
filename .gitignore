@@ -3,10 +3,6 @@ generate_video/outputs/checkpoints/lwb_imper_fashion_place/net_epoch_30_id_G.pth
 generate_video/outputs/checkpoints/lwb_imper_place/net_epoch_30_id_G.pth
 generate_video/assets/pretrains/hmr_tf2pt.pth
 generate_video/assets/pretrains/sphere20a_20171020.pth
-get_human_body_info/src/external/AlphaPose/models/sppe/duc_se.pth
-get_human_body_info/src/external/AlphaPose/models/yolo/yolov3-spp.weights
-get_human_body_info/models/hmr_noS5.ckpt-642561.data-00000-of-00001
-get_human_body_info/models/hmmr_model.ckpt-1119816.data-00000-of-00001
 
 __pycache__
 
@@ -15,9 +11,5 @@ __pycache__
 demo/results/*
 demo/src/*
 demo/transfer_data/*
-
-get_keyframe/frames/*
-
-get_human_body_info/demo_output/*
 
 !.gitkeep
