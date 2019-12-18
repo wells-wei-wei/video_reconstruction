@@ -179,7 +179,7 @@ class Imitator(BaseModel):
         #length = len(human_body_info)
         #process_bar = tqdm(range(length)) if verbose else range(length)
         t=0
-        for key in human_body_info:
+        for key ,v in tqdm(human_body_info.items(), total=len(human_body_info)):
             tgt_smpl=human_body_info[key]
             tsf_inputs = self.transfer_params_by_smpl(tgt_smpl=tgt_smpl, cam_strategy=cam_strategy, t=t)
             preds = self.forward(tsf_inputs, self.tsf_info['T'])
