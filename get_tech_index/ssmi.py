@@ -102,6 +102,8 @@ if __name__ == '__main__':
     files.sort()
     all_dist=0
     for file in files:
+        if(file[-3:]!="jpg"):
+            continue
         file_num=file[5:]
         d1_file_name=file_num
         if(os.path.exists(os.path.join("../demo/src/frames",d1_file_name))):

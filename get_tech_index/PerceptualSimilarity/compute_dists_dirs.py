@@ -20,6 +20,8 @@ files = os.listdir(opt.dir0)
 files.sort()
 all_dist=0
 for file in files:
+	if(file[-3:]!="jpg"):
+		continue
 	file_num=file[5:]
 	d1_file_name=file_num
 	if(os.path.exists(os.path.join(opt.dir1,d1_file_name))):
